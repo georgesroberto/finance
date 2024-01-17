@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'sign_up_screen.dart'; // Import the SignUpScreen class
 
-class SignInScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -27,10 +28,17 @@ class _SignInScreenState extends State<SignInScreen> {
     return null;
   }
 
-  void _signIn() {
+  String? _validateConfirmPassword(String? value) {
+    if (value != _passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
+  void _signUp() {
     if (_formKey.currentState?.validate() ?? false) {
-      // Perform sign-in logic here
-      // Access validated values using _emailController.text and _passwordController.text
+      // Perform sign-up logic here
+      // Access validated values using _emailController.text, _passwordController.text, and _confirmPasswordController.text
     }
   }
 
@@ -38,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'),
+        title: Text('Sign Up'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -60,19 +68,23 @@ class _SignInScreenState extends State<SignInScreen> {
                 validator: _validatePassword,
               ),
               SizedBox(height: 16.0),
+              TextFormField(
+                controller: _confirmPasswordController,
+                decoration: InputDecoration(labelText: 'Confirm Password'),
+                obscureText: true,
+                validator: _validateConfirmPassword,
+              ),
+              SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: _signIn,
-                child: Text('Sign In'),
+                onPressed: _signUp,
+                child: Text('Sign Up'),
               ),
               SizedBox(height: 16.0),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()),
-                  );
+                  Navigator.pop(context);
                 },
-                child: Text('Don\'t have an account? Sign Up'),
+                child: Text('Already have an account? Sign In'),
               ),
             ],
           ),

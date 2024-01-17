@@ -1,24 +1,23 @@
+// lib/theme/theme_provider.dart
 import 'package:flutter/material.dart';
-import 'dark_mode.dart';
-import 'light_mode.dart';
 
-class ThemeProvider with ChangeNotifier {
-  ThemeData _themeData = lightMode;
+class ThemeProvider extends InheritedWidget {
+  final bool isDarkMode;
+  final Function toggleTheme;
 
-  ThemeData get themeData => _themeData;
+  const ThemeProvider({
+    Key? key,
+    required Widget child,
+    required this.isDarkMode,
+    required this.toggleTheme,
+  }) : super(key: key, child: child);
 
-  bool get isDarkMode => _themeData == darkMode;
-
-  set themeData(ThemeData themeData) {
-    _themeData = themeData;
-    notifyListeners();
+  static ThemeProvider of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<ThemeProvider>()!;
   }
 
-  void toggleTheme() {
-    if (_themeData == lightMode) {
-      themeData = darkMode;
-    } else {
-      themeData = lightMode;
-    }
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
+    return true;
   }
 }

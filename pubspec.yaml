@@ -10,7 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  splashscreen:
+
+  fl_chart: ^0.41.0
+  # splashscreen:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
