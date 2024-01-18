@@ -1,50 +1,45 @@
-// import 'package:flutter/material.dart';
-// import 'package:finance/screens/splash_screen.dart';
+// lib/screens/splash_screen.dart
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:finance/screens/home_page.dart';
 
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
 
-// void main() {
-//   runApp(MaterialApp(
-//     home: MyApp(),
-//   ));
-// }
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Set a timer to navigate to the home screen after 5 seconds
+    Timer(Duration(seconds: 5), () {
+      Navigator.pushReplacementNamed(context, '/home');
+    });
+  }
 
-// class MyApp extends StatefulWidget {
-//   @override
-//   _MyAppState createState() => new _MyAppState();
-// }
-
-// class _MyAppState extends State<MyApp> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return new SplashScreen(
-//         seconds: 14,
-//         navigateAfterSeconds: new AfterSplash(),
-//         title: new Text(
-//           'Welcome In SplashScreen',
-//           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-//         ),
-//         image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
-//         backgroundColor: Colors.white,
-//         styleTextUnderTheLoader: new TextStyle(),
-//         photoSize: 100.0,
-//         onClick: () => print("Flutter Egypt"),
-//         loaderColor: Colors.red);
-//   }
-// }
-
-// class AfterSplash extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//       appBar: new AppBar(
-//           title: new Text("Welcome In SplashScreen Package"),
-//           automaticallyImplyLeading: false),
-//       body: new Center(
-//         child: new Text(
-//           "Done!",
-//           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Add your logo image here
+            Image.asset(
+              'assets/logo.png',
+              width: 50,
+              height: 50,
+              // You may need to adjust the width and height based on your logo size
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Welcome to Max',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -3,21 +3,28 @@ import 'package:flutter/material.dart';
 import 'transaction/deposit_screen.dart';
 import 'transaction/withdraw_screen.dart';
 import '../components/bottom_navigation.dart';
+import 'package:provider/provider.dart';
+import '../state/app_state.dart';
+
 
 class HomePage extends StatelessWidget {
   final String username = "Mr. Georges"; // Replace with actual username
-  final double accountBalance = 1000.00; // Replace with actual account balance
+
+  // final double accountBalance = 1000.00; // Replace with actual account balance
   final List<String> recentTransactions = [
-    'Deposited KES 500.00',
+    'Deposited KES 1200.00',
     'Withdrawn KES 200.00',
     // Add more transactions as needed
   ];
 
   @override
   Widget build(BuildContext context) {
+    // Example: accessing account balance in HomePage
+    double accountBalance = Provider.of<AppState>(context).accountBalance;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Coinsense'),
+        title: Text('Max'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
